@@ -1,13 +1,13 @@
 @echo off
-title System & Browser Cleaner
+title System and Browser Cleaner
 color 0A
 
-:: Check for Administrator privileges
+:: Automatically request Administrator privileges if not already running as Admin
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-    echo [!] Please run this file as Administrator to clean all system directories.
-    pause
-    exit
+    echo Requesting Administrator privileges...
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
+    exit /b
 )
 
 echo ==================================================
